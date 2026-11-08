@@ -1,7 +1,7 @@
 # 5A Rentals
 
 Website and owner dashboard for the Bañas family's 6 rental houses in Dasmariñas City.
-Built by USAD Labs. Design: [docs/design](docs/design) · Spec: [docs/specs/2026-11-06-rental-system-design.md](docs/specs/2026-11-06-rental-system-design.md)
+Built by USAD Labs. Live: https://5a-rentals.vercel.app · Code: [usad-labs/house-rental-system](https://github.com/usad-labs/house-rental-system) (Vercel deploys from here; also mirrored to 2AsB2). Design: [docs/design](docs/design) · Spec: [docs/specs/2026-11-06-rental-system-design.md](docs/specs/2026-11-06-rental-system-design.md)
 
 - **Website** (`/`): houses, availability, "Book a viewing" form.
 - **Dashboard** (`/dashboard`): rent, utility bills, repairs, inquiries, tenants, photos, GCash QR.
