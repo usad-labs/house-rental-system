@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5A Rentals dashboard options</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#0C2C55; --teal:#296374; --sea:#629FAD; --cream:#EDEDCE; --paper:#F3F1E2; --ink2:#3D5170; --ink3:#56667C; --line:#DEDFCF; --red:#B42318; --amber:#9A5B00; --green:#2E7D57; --yellow:#FFE27A;
+    --sign:"Archivo Black",sans-serif; --display:"Barlow Condensed",sans-serif; --body:"Barlow",sans-serif; --hand:"Caveat",cursive; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#D9DCCB; font-family:var(--body); color:var(--navy); }
+  .deck { padding:28px 24px 48px; max-width:1760px; margin:0 auto; }
+  .deck h1 { font:700 32px var(--display); margin:0 0 4px; }
+  .deck > p { margin:0 0 22px; color:var(--ink2); }
+  .frames { display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start; }
+  figure { margin:0; display:grid; gap:10px; justify-items:center; }
+  figcaption { text-align:center; max-width:390px; }
+  figcaption b { display:block; font:400 20px var(--sign); }
+  figcaption span { color:var(--ink2); font-size:15px; }
+  .phone { width:390px; height:844px; border:10px solid var(--navy); border-radius:44px; overflow:hidden; position:relative; background:var(--paper); box-shadow:0 30px 60px -30px rgba(12,44,85,.55); }
+  .screen { height:100%; overflow:auto; scrollbar-width:none; padding-bottom:80px; }
+  .top { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:var(--navy); color:#fff; border-bottom:4px solid var(--teal); font:700 18px var(--display); }
+  .plaque { display:inline-grid; place-items:center; height:26px; min-width:34px; padding:0 6px; margin-right:8px; border-radius:5px; background:var(--cream); color:var(--navy); font:700 17px var(--display); box-shadow:inset 0 0 0 2px var(--cream), inset 0 0 0 3.5px var(--navy); }
+  .tabs { position:absolute; left:0; right:0; bottom:0; display:grid; grid-template-columns:repeat(5,1fr); background:#fff; border-top:1px solid var(--line); padding:8px 0 14px; font:600 11px var(--body); color:var(--ink3); text-align:center; }
+  .tabs span:first-child { color:var(--teal); }
+  .tabs i { display:block; font-style:normal; font-size:18px; }
+  .pad { padding:16px; }
+  h2 { font:400 22px/1.1 var(--sign); margin:0 0 12px; }
+  .lbl { font:700 12px/1 var(--display); letter-spacing:.08em; text-transform:uppercase; color:var(--teal); margin:18px 0 8px; }
+
+  /* A: signboard + compound */
+  .a-stats { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .a-stat { position:relative; padding:12px 10px 10px; background:var(--cream); border:2px solid var(--navy); border-radius:8px; box-shadow:0 3px 0 var(--navy); }
+  .a-stat small { display:block; font:700 11px var(--display); letter-spacing:.08em; text-transform:uppercase; color:var(--teal); }
+  .a-stat b { font:400 22px var(--sign); }
+  .a-stat.alert { background:#FBE9E7; } .a-stat.alert b { color:var(--red); } .a-stat.new { background:#FFF3C4; }
+  .a-todo { display:grid; grid-template-columns:34px 1fr; gap:10px; align-items:center; padding:9px 10px; background:#FBFBF3; border:1.5px solid var(--navy); border-radius:8px; margin-bottom:6px; font-size:14px; }
+  .a-todo i { display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:#FBE9E7; font-style:normal; }
+  .a-todo.m i { background:#FFF1D6; }
+  .a-todo span { color:var(--ink3); font-size:12px; display:block; }
+  .a-map { background:#E4E6D2; border:2px solid var(--navy); border-radius:10px; padding:10px; display:grid; grid-template-columns:1fr 18px 1fr; gap:8px; }
+  .a-walk { grid-row:1/4; grid-column:2; background:repeating-linear-gradient(180deg,#CFD2BA 0 8px,#D9DBC4 8px 16px); border-radius:4px; }
+  .a-lot { padding:8px; border-radius:6px; font-size:12px; min-height:74px; }
+  .a-lot b { display:block; font:400 14px var(--sign); }
+  .a-lot.o { background:var(--navy); color:#C9D6E2; } .a-lot.o b { color:var(--cream); }
+  .a-lot.v { background:var(--cream); border:2px solid var(--teal); } .a-lot.r { background:#fff; border:2px dashed var(--navy); }
+  .ok { color:#2E7D57; font-weight:600; } .a-lot.o .ok { color:#8FD6AE; } .late { color:var(--red); font-weight:600; } .a-lot.o .late { color:#FF9C91; } .soon { color:var(--amber); font-weight:600; } .a-lot.o .soon { color:#FFD27A; }
+
+  /* B: rent ledger (kuwaderno) */
+  .b-paper { background:#FFFDF2 repeating-linear-gradient(180deg, transparent 0 27px, #D5E3EA 27px 28px); border-left:3px double #E7A6A0; min-height:100%; }
+  .b-head { padding:16px 16px 6px 20px; }
+  .b-head h2 { margin:0; }
+  .b-hand { font:700 22px var(--hand); color:var(--teal); }
+  .b-total { display:flex; gap:16px; padding:0 20px 8px; font:700 26px var(--hand); }
+  .b-total span { font:600 12px var(--body); color:var(--ink3); display:block; }
+  .b-table { width:calc(100% - 24px); margin:6px 12px; border-collapse:collapse; font-size:13px; }
+  .b-table th { font:700 11px var(--display); letter-spacing:.06em; text-transform:uppercase; color:var(--teal); text-align:center; padding:6px 2px; border-bottom:2px solid var(--navy); }
+  .b-table th:first-child { text-align:left; }
+  .b-table td { padding:7px 2px; border-bottom:1px solid #D5E3EA; text-align:center; height:42px; }
+  .b-table td:first-child { text-align:left; font-weight:600; }
+  .stamp { display:inline-block; font:700 11px var(--display); letter-spacing:.06em; text-transform:uppercase; padding:3px 5px; border:2px solid; border-radius:3px; transform:rotate(-6deg); }
+  .stamp.paid { color:var(--green); } .stamp.due { color:var(--red); } .stamp.soon { color:var(--amber); } .dash { color:var(--ink3); }
+  .b-notes { margin:12px 16px 0 20px; font:600 20px/28px var(--hand); color:var(--navy); }
+  .b-notes li { margin-left:-6px; }
+
+  /* C: calendar month */
+  .c-month { display:flex; justify-content:space-between; align-items:baseline; }
+  .c-month small { color:var(--ink3); font-size:14px; }
+  .c-cal { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-top:6px; }
+  .c-cal .dow { font:700 11px var(--display); color:var(--ink3); text-align:center; }
+  .c-day { aspect-ratio:1; border-radius:6px; background:#fff; border:1px solid var(--line); font-size:12px; padding:3px; position:relative; }
+  .c-day.mute { background:transparent; border-color:transparent; color:var(--ink3); }
+  .c-day.today { border:2px solid var(--navy); background:var(--cream); font-weight:700; }
+  .c-day i { position:absolute; bottom:4px; left:4px; right:4px; height:5px; border-radius:3px; }
+  .c-day i.r { background:var(--red); } .c-day i.a { background:#E0A100; } .c-day i.g { background:var(--green); } .c-day i.b { background:var(--sea); }
+  .c-key { display:flex; gap:12px; flex-wrap:wrap; font-size:12px; color:var(--ink2); margin:10px 0 4px; }
+  .c-key span::before { content:""; display:inline-block; width:10px; height:5px; border-radius:3px; margin-right:5px; vertical-align:middle; background:var(--c); }
+  .c-agenda { border-top:2px dashed var(--navy); margin-top:12px; }
+  .c-row { display:grid; grid-template-columns:52px 1fr auto; gap:10px; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .c-date { text-align:center; background:var(--navy); color:var(--cream); border-radius:6px; padding:4px 0; font:700 11px var(--display); text-transform:uppercase; }
+  .c-date b { display:block; font:400 18px var(--sign); }
+  .c-row span { color:var(--ink3); font-size:12px; display:block; }
+  .c-btn { font:600 13px var(--body); color:var(--teal); }
+
+  /* D: today feed (one task at a time) */
+  .d-hero { background:var(--navy); color:#fff; padding:18px 16px 22px; }
+  .d-hero h2 { color:var(--cream); margin-bottom:14px; }
+  .d-ring { display:grid; grid-template-columns:110px 1fr; gap:16px; align-items:center; }
+  .ring { width:110px; height:110px; border-radius:50%; background:conic-gradient(#8FD6AE 0 41%, rgba(237,237,206,.18) 41% 100%); display:grid; place-items:center; }
+  .ring div { width:84px; height:84px; border-radius:50%; background:var(--navy); display:grid; place-items:center; text-align:center; font:400 20px/1 var(--sign); color:var(--cream); }
+  .ring small { display:block; font:600 11px var(--body); color:#C9D6E2; margin-top:4px; }
+  .d-ring p { margin:0; color:#C9D6E2; font-size:14px; line-height:1.5; }
+  .d-ring p b { color:#fff; font-size:16px; }
+  .d-big { margin:-12px 12px 0; background:var(--cream); border:2px solid var(--navy); border-radius:12px; padding:14px; box-shadow:0 5px 0 var(--navy); position:relative; }
+  .d-big .lbl { margin-top:0; color:var(--red); }
+  .d-big h3 { font:400 20px/1.15 var(--sign); margin:0 0 4px; }
+  .d-big p { margin:0 0 12px; color:var(--ink2); font-size:14px; }
+  .d-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .d-actions a { display:grid; place-items:center; min-height:44px; border-radius:8px; font-weight:600; text-decoration:none; }
+  .d-actions .p { background:var(--navy); color:var(--cream); } .d-actions .s { background:#fff; color:var(--teal); border:2px solid var(--sea); }
+  .d-next { display:flex; justify-content:space-between; font-size:13px; color:var(--ink3); margin:8px 4px 0; }
+  .d-chips { display:flex; gap:8px; overflow:auto; padding:0 16px 4px; scrollbar-width:none; }
+  .d-chip { flex:none; width:118px; border-radius:10px; overflow:hidden; border:2px solid var(--navy); background:#fff; font-size:12px; }
+  .d-chip img { width:100%; height:62px; object-fit:cover; display:block; background:var(--line); }
+  .d-chip div { padding:6px 8px; }
+  .d-chip b { display:block; font:400 13px var(--sign); }
+  .d-list { padding:0 16px; }
+  .d-item { display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .d-item span { font-size:12px; color:var(--ink3); display:block; }
+  .pill { font:700 11px var(--display); letter-spacing:.05em; text-transform:uppercase; padding:4px 8px; border-radius:999px; }
+  .pill.r { background:#FBE9E7; color:var(--red); } .pill.a { background:#FFF1D6; color:var(--amber); }
+</style>
+</head>
+<body>
+<main class="deck">
+  <h1>5A Rentals owner dashboard: 4 options</h1>
+  <p>Same sample data in each (Sunday, Nov 8). Pick one, or mix parts (for example, B's rent ledger inside A).</p>
+  <div class="frames">
+
+    <!-- A -->
+    <figure>
+      <div class="phone"><div class="screen">
+        <div class="top"><span><span class="plaque">5A</span>Owner dashboard</span><span>☰</span></div>
+        <div class="pad">
+          <h2>Sunday, November 8</h2>
+          <div class="a-stats">
+            <div class="a-stat"><small>Occupied</small><b>4/6</b></div>
+            <div class="a-stat alert"><small>To collect</small><b>₱4,000</b></div>
+            <div class="a-stat"><small>Collected</small><b>₱2,800</b></div>
+            <div class="a-stat new"><small>Inquiries</small><b>2 new</b></div>
+          </div>
+          <div class="lbl">Needs attention · 5</div>
+          <div class="a-todo"><i>₱</i><div><b>₱1,500 rent overdue</b><span>Narra House · Paolo · 8 days late</span></div></div>
+          <div class="a-todo"><i>💧</i><div><b>Water bill unpaid</b><span>Banaba · ₱420 · cut-off Nov 10</span></div></div>
+          <div class="a-todo m"><i>₱</i><div><b>₱2,500 rent due in 3 days</b><span>Banaba House · Ramon</span></div></div>
+          <div class="lbl">The compound</div>
+          <div class="a-map">
+            <div class="a-lot v"><b>Kamagong</b>Vacant<br>1 viewing request</div>
+            <div class="a-walk"></div>
+            <div class="a-lot r"><b>Yakal</b>Under repair<br>Ceiling leak</div>
+            <div class="a-lot o"><b>Acacia</b>Liza<br><span class="ok">Oct paid ✓</span></div>
+            <div class="a-lot o"><b>Narra</b>Paolo<br><span class="late">₱1,500 overdue</span></div>
+            <div class="a-lot o"><b>Molave</b>Grace<br><span class="ok">Nov paid ✓</span></div>
+            <div class="a-lot o"><b>Banaba</b>Ramon<br><span class="soon">Due Nov 11</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="tabs"><span><i>⌂</i>Overview</span><span><i>▦</i>Houses</span><span><i>₱</i>Rent</span><span><i>🔧</i>Repairs</span><span><i>✉</i>Inbox</span></div></div>
+      <figcaption><b>A · Signboard + compound map</b><span>Money at a glance, a to-do list, and the 6 houses drawn like the real compound. (Already built.)</span></figcaption>
+    </figure>
+
+    <!-- B -->
+    <figure>
+      <div class="phone"><div class="screen b-paper">
+        <div class="top"><span><span class="plaque">5A</span>Rent ledger</span><span>☰</span></div>
+        <div class="b-head"><h2>November 2026</h2><span class="b-hand">Kuwaderno ng upa</span></div>
+        <div class="b-total"><div>₱2,800<span>collected</span></div><div style="color:#B42318">₱4,000<span>to collect</span></div></div>
+        <table class="b-table">
+          <tr><th>House</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Bills</th></tr>
+          <tr><td>Acacia</td><td><span class="stamp paid">Paid</span></td><td><span class="stamp paid">Paid</span></td><td class="dash">Nov 19</td><td><span class="stamp paid">✓</span></td></tr>
+          <tr><td>Narra</td><td><span class="stamp paid">Paid</span></td><td><span class="stamp due">−1,500</span></td><td class="dash">Nov 30</td><td><span class="stamp soon">Due</span></td></tr>
+          <tr><td>Molave</td><td><span class="stamp paid">Paid</span></td><td><span class="stamp paid">Paid</span></td><td><span class="stamp paid">Paid</span></td><td><span class="stamp paid">✓</span></td></tr>
+          <tr><td>Banaba</td><td><span class="stamp paid">Paid</span></td><td><span class="stamp paid">Paid</span></td><td><span class="stamp soon">Nov 11</span></td><td><span class="stamp due">Late</span></td></tr>
+          <tr><td>Kamagong</td><td class="dash">—</td><td class="dash">—</td><td class="dash">vacant</td><td class="dash">—</td></tr>
+          <tr><td>Yakal</td><td class="dash">—</td><td class="dash">—</td><td class="dash">repair</td><td class="dash">—</td></tr>
+        </table>
+        <ul class="b-notes">
+          <li>Kolektahin si Paolo (Narra) ₱1,500</li>
+          <li>Banaba water bill, cut-off Nov 10!</li>
+          <li>Reply to 2 viewing requests</li>
+        </ul>
+      </div>
+      <div class="tabs"><span><i>📒</i>Ledger</span><span><i>▦</i>Houses</span><span><i>💡</i>Bills</span><span><i>🔧</i>Repairs</span><span><i>✉</i>Inbox</span></div></div>
+      <figcaption><b>B · Rent ledger notebook</b><span>Looks like the family's paper notebook: every house × month with Paid stamps. Tap a cell to record a payment.</span></figcaption>
+    </figure>
+
+    <!-- C -->
+    <figure>
+      <div class="phone"><div class="screen">
+        <div class="top"><span><span class="plaque">5A</span>This month</span><span>☰</span></div>
+        <div class="pad">
+          <div class="c-month"><h2>November</h2><small>₱2,800 of ₱13,300</small></div>
+          <div class="c-cal">
+            <span class="dow">S</span><span class="dow">M</span><span class="dow">T</span><span class="dow">W</span><span class="dow">T</span><span class="dow">F</span><span class="dow">S</span>
+            <div class="c-day">1</div><div class="c-day">2</div><div class="c-day">3<i class="r"></i></div><div class="c-day">4</div><div class="c-day">5</div><div class="c-day">6<i class="g"></i></div><div class="c-day">7</div>
+            <div class="c-day today">8</div><div class="c-day">9</div><div class="c-day">10<i class="r"></i></div><div class="c-day">11<i class="a"></i></div><div class="c-day">12<i class="b"></i></div><div class="c-day">13</div><div class="c-day">14</div>
+            <div class="c-day">15</div><div class="c-day">16</div><div class="c-day">17</div><div class="c-day">18</div><div class="c-day">19<i class="a"></i></div><div class="c-day">20</div><div class="c-day">21</div>
+            <div class="c-day">22</div><div class="c-day">23</div><div class="c-day">24</div><div class="c-day">25</div><div class="c-day">26</div><div class="c-day">27</div><div class="c-day">28</div>
+            <div class="c-day">29</div><div class="c-day">30<i class="a"></i></div><div class="c-day mute">1</div><div class="c-day mute">2</div><div class="c-day mute">3</div><div class="c-day mute">4</div><div class="c-day mute">5</div>
+          </div>
+          <div class="c-key"><span style="--c:#B42318">Overdue / cut-off</span><span style="--c:#E0A100">Rent due</span><span style="--c:#629FAD">Bill due</span><span style="--c:#2E7D57">Paid</span></div>
+          <div class="c-agenda">
+            <div class="c-row"><div class="c-date">Oct<b>31</b></div><div><b>Narra rent, ₱1,500 left</b><span>8 days late · Paolo</span></div><a class="c-btn">Record</a></div>
+            <div class="c-row"><div class="c-date">Nov<b>10</b></div><div><b>Banaba water cut-off</b><span>₱420 · tenant pays</span></div><a class="c-btn">Open</a></div>
+            <div class="c-row"><div class="c-date">Nov<b>11</b></div><div><b>Banaba rent ₱2,500</b><span>in 3 days · Ramon</span></div><a class="c-btn">Record</a></div>
+            <div class="c-row"><div class="c-date">Nov<b>12</b></div><div><b>Narra electricity ₱3,120</b><span>you pay</span></div><a class="c-btn">Open</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="tabs"><span><i>📅</i>Month</span><span><i>▦</i>Houses</span><span><i>₱</i>Rent</span><span><i>🔧</i>Repairs</span><span><i>✉</i>Inbox</span></div></div>
+      <figcaption><b>C · Calendar of due dates</b><span>The whole month at once: rent, bills and cut-offs as colored bars, with an agenda list underneath.</span></figcaption>
+    </figure>
+
+    <!-- D -->
+    <figure>
+      <div class="phone"><div class="screen">
+        <div class="top"><span><span class="plaque">5A</span>Today</span><span>☰</span></div>
+        <div class="d-hero">
+          <h2>Magandang araw!</h2>
+          <div class="d-ring">
+            <div class="ring"><div>41%<small>collected</small></div></div>
+            <p><b>₱2,800</b> of ₱6,800 rent due so far this month.<br>4 of 6 houses occupied.</p>
+          </div>
+        </div>
+        <div class="d-big">
+          <div class="lbl">Do this first · 1 of 5</div>
+          <h3>Collect ₱1,500 from Paolo</h3>
+          <p>Narra House · October rent · 8 days late</p>
+          <div class="d-actions"><a class="p">Record payment</a><a class="s">Text Paolo</a></div>
+          <div class="d-next"><span>Next: Banaba water bill (cut-off Nov 10)</span><span>→</span></div>
+        </div>
+        <div class="lbl" style="padding:0 16px">Houses</div>
+        <div class="d-chips">
+          <div class="d-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/1439Palumlum%2C_Alfonso%2C_Cavite_20.jpg/960px-1439Palumlum%2C_Alfonso%2C_Cavite_20.jpg" alt=""><div><b>Narra</b><span class="late">Overdue</span></div></div>
+          <div class="d-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/My_Nice_house_for_the_weekend%2C_Dive_Solana%2C_Mabini_Batangas_-_panoramio.jpg/960px-My_Nice_house_for_the_weekend%2C_Dive_Solana%2C_Mabini_Batangas_-_panoramio.jpg" alt=""><div><b>Banaba</b><span class="soon">Due Nov 11</span></div></div>
+          <div class="d-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Small_House_in_the_Philippines_%2802-28-2021%29.jpg/960px-Small_House_in_the_Philippines_%2802-28-2021%29.jpg" alt=""><div><b>Kamagong</b>Vacant</div></div>
+        </div>
+        <div class="lbl" style="padding:0 16px">Also today</div>
+        <div class="d-list">
+          <div class="d-item"><div><b>Banaba water bill</b><span>₱420 · cut-off Nov 10</span></div><span class="pill r">Late</span></div>
+          <div class="d-item"><div><b>Banaba rent ₱2,500</b><span>Ramon · Nov 11</span></div><span class="pill a">3 days</span></div>
+          <div class="d-item"><div><b>2 viewing requests</b><span>Kamagong, Yakal</span></div><span class="pill a">New</span></div>
+        </div>
+      </div>
+      <div class="tabs"><span><i>☀</i>Today</span><span><i>▦</i>Houses</span><span><i>₱</i>Rent</span><span><i>🔧</i>Repairs</span><span><i>✉</i>Inbox</span></div></div>
+      <figcaption><b>D · "Do this first" daily focus</b><span>One big task at a time with the buttons to finish it, plus a progress ring for rent collected. Least thinking needed.</span></figcaption>
+    </figure>
+
+  </div>
+</main>
+</body>
+</html>

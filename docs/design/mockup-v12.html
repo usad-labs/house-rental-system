@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5A Rentals Mockup v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Kaushan+Script&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0C2C55;
+    --teal: #296374;
+    --sea: #629FAD;
+    --cream: #EDEDCE;
+    --paper: #F8F8F0;
+    --ink: #0C2C55;
+    --ink-2: #3D5170;
+    --ink-3: #56667C;
+    --line: #DEDFCF;
+    --white: #FFFFFF;
+    --green: #2E7D57;
+    --red: #B42318;
+    --amber: #9A5B00;
+    --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --body: "Barlow", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #D9DCCB; color: var(--ink); font-family: var(--body); }
+  .deck { max-width: 1440px; margin: 0 auto; padding: 32px 24px 64px; }
+  .deck-head { display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: end; justify-content: space-between; margin-bottom: 28px; }
+  .deck-head h1 { font-family: var(--display); font-weight: 700; font-size: 34px; margin: 0 0 4px; }
+  .deck-head p { margin: 0; color: var(--ink-2); max-width: 64ch; line-height: 1.5; }
+  .tokens { display: flex; gap: 10px; flex-wrap: wrap; }
+  .swatch { width: 92px; font-size: 12px; color: var(--ink-2); }
+  .swatch span { display: block; height: 40px; border-radius: 6px; border: 1px solid rgba(12,44,85,.15); margin-bottom: 6px; }
+  .frames { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; align-items: flex-start; }
+  .frame-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 0; }
+  .frame-wrap figcaption { font-weight: 600; color: var(--ink-2); }
+  .phone { width: 390px; height: 820px; border: 10px solid var(--navy); border-radius: 44px; overflow: hidden; background: var(--paper); position: relative; box-shadow: 0 30px 60px -30px rgba(12,44,85,.55); }
+  .screen { height: 100%; overflow-y: auto; scrollbar-width: none; position: relative; }
+  .screen::-webkit-scrollbar { display: none; }
+
+  .brand { display: flex; align-items: center; gap: 8px; font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--navy); text-decoration: none; }
+  .plaque { display: inline-grid; place-items: center; height: 30px; min-width: 40px; padding: 0 7px; border-radius: 6px; background: var(--navy); color: var(--cream); font: 700 20px/1 var(--display); box-shadow: inset 0 0 0 2px var(--navy), inset 0 0 0 3.5px rgba(237,237,206,.8); }
+  .plaque--light { background: var(--cream); color: var(--navy); box-shadow: inset 0 0 0 2px var(--cream), inset 0 0 0 3.5px var(--navy); }
+
+  .site-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--white); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+  .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: var(--teal); color: #fff; border: 0; }
+
+  .hero { position: relative; min-height: 520px; display: flex; align-items: flex-end; color: #fff; background: var(--navy) url("https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/1439Palumlum%2C_Alfonso%2C_Cavite_20.jpg/960px-1439Palumlum%2C_Alfonso%2C_Cavite_20.jpg") center/cover; }
+  .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,44,85,.15) 0%, rgba(12,44,85,.55) 45%, rgba(12,44,85,.94) 100%); }
+  .hero-copy { position: relative; padding: 24px 16px 22px; }
+  .location-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--cream); color: var(--navy); font-weight: 600; font-size: 14px; padding: 6px 10px; border-radius: 999px; margin-bottom: 14px; }
+  .hero h1 { font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1; margin: 0 0 10px; }
+  .hero p { font-size: 17px; line-height: 1.5; color: #DCE6EE; margin: 0 0 18px; max-width: 34ch; }
+  .btn-row { display: flex; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 10px; font: 600 16px/1 var(--body); text-decoration: none; border: 2px solid transparent; }
+  .btn-primary { background: var(--teal); color: #fff; }
+  .btn-cream { background: var(--cream); color: var(--navy); }
+  .btn-ghost { background: transparent; color: #fff; border-color: rgba(237,237,206,.7); }
+  .btn-outline { background: var(--white); color: var(--teal); border-color: var(--sea); }
+  .btn-block { flex: 1; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--white); border-bottom: 1px solid var(--line); }
+  .stats div { padding: 14px 8px; text-align: center; border-right: 1px solid var(--line); }
+  .stats div:last-child { border-right: 0; }
+  .stats b { display: block; font: 700 24px/1 var(--display); color: var(--navy); }
+  .stats span { font-size: 13px; color: var(--ink-3); }
+
+  .section-title { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1.05; margin: 0 0 6px; }
+  .section-sub { margin: 0 0 16px; color: var(--ink-2); font-size: 16px; line-height: 1.45; }
+  .list { padding: 26px 16px 8px; display: grid; gap: 18px; }
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; text-decoration: none; color: inherit; display: block; }
+  .card-photo { position: relative; aspect-ratio: 4 / 3; background: var(--line); }
+  .card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .badge { position: absolute; left: 12px; top: 12px; font-weight: 600; font-size: 14px; padding: 6px 11px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; }
+  .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+  .badge--available { background: var(--cream); color: var(--teal); }
+  .badge--soon { background: var(--white); color: var(--navy); }
+  .badge--occupied { background: rgba(12,44,85,.82); color: #fff; }
+  .card-body { padding: 14px 16px 16px; }
+  .card h3 { font-size: 20px; font-weight: 600; margin: 0 0 2px; }
+  .card .loc { margin: 0 0 12px; color: var(--ink-3); font-size: 15px; }
+  .card-foot { display: flex; align-items: end; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 12px; }
+  .price { font-family: var(--display); font-weight: 700; font-size: 28px; margin: 0; color: var(--navy); line-height: 1; }
+  .price small { font-family: var(--body); font-weight: 500; font-size: 14px; color: var(--ink-3); }
+  .util { font-size: 13px; font-weight: 600; color: var(--teal); background: #DCEBEE; padding: 4px 10px; border-radius: 6px; }
+  .facts { list-style: none; padding: 0; margin: 0; display: flex; gap: 12px; color: var(--ink-2); font-size: 14px; }
+  .is-muted .card-photo img { filter: grayscale(.4); }
+
+  .nearby { padding: 28px 16px; background: var(--navy); color: #fff; margin-top: 18px; }
+  .nearby .section-sub { color: #C9D6E2; }
+  .places { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: rgba(237,237,206,.2); border-radius: 12px; overflow: hidden; }
+  .places li { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: #123663; padding: 14px; }
+  .places b { font-weight: 600; font-size: 16px; }
+  .places span { font-size: 14px; color: var(--cream); white-space: nowrap; }
+
+  .section { padding: 28px 16px; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: step; }
+  .steps li { display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; font-size: 16px; line-height: 1.45; color: var(--ink-2); }
+  .steps li::before { counter-increment: step; content: counter(step); width: 36px; height: 36px; border-radius: 999px; background: var(--cream); color: var(--teal); font: 700 18px/36px var(--display); text-align: center; }
+  .steps strong { display: block; color: var(--ink); font-weight: 600; }
+  .cta { margin: 0 16px 28px; padding: 22px 18px; background: var(--teal); color: #fff; border-radius: 14px; }
+  .cta h3 { font: 700 26px/1.05 var(--display); margin: 0 0 6px; }
+  .cta p { margin: 0 0 14px; color: #E1EEF0; }
+  .footer { padding: 24px 16px 32px; background: var(--navy); color: #C9D6E2; font-size: 15px; line-height: 1.6; }
+  .footer .brand { color: #fff; margin-bottom: 6px; }
+  .footer a { color: var(--cream); }
+
+  .back { display: inline-flex; align-items: center; gap: 4px; color: var(--teal); font-weight: 600; text-decoration: none; font-size: 15px; }
+  .gallery { position: relative; aspect-ratio: 4 / 3; background: var(--line); }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .counter { position: absolute; right: 12px; bottom: 12px; background: rgba(12,44,85,.8); color: #fff; font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 999px; }
+  .thumbs { display: flex; gap: 8px; padding: 10px 16px 0; }
+  .thumbs img { width: 72px; height: 54px; object-fit: cover; border-radius: 6px; border: 2px solid transparent; }
+  .thumbs img.on { border-color: var(--teal); }
+  .detail { padding: 18px 16px 8px; }
+  .detail h1 { font-family: var(--display); font-weight: 700; font-size: 38px; line-height: 1; margin: 0 0 6px; }
+  .detail .loc { color: var(--ink-2); margin: 0 0 16px; font-size: 16px; }
+  .price-big { font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1; color: var(--navy); }
+  .terms { margin: 6px 0 0; color: var(--ink-2); font-size: 15px; line-height: 1.45; }
+  .fact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin: 18px 0; }
+  .fact-grid div { background: var(--white); padding: 12px 14px; }
+  .fact-grid b { display: block; font: 700 22px/1.1 var(--display); }
+  .fact-grid span { color: var(--ink-3); font-size: 14px; }
+  .checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .checks li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; line-height: 1.4; }
+  .checks svg { flex: none; margin-top: 2px; }
+  .h2 { font: 700 26px var(--display); margin: 22px 0 12px; }
+  .prose { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+  .form { display: grid; gap: 12px; background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .field { display: grid; gap: 6px; font-size: 15px; font-weight: 600; }
+  .field input, .field select, .field textarea { font: 400 16px var(--body); color: var(--ink); min-height: 46px; padding: 10px 12px; border: 1px solid #C9CCB8; border-radius: 8px; background: var(--white); }
+  .field textarea { min-height: 84px; resize: none; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hint { font-size: 14px; color: var(--ink-3); margin: 0; font-weight: 400; }
+  .sticky-bar { position: sticky; bottom: 0; display: flex; gap: 10px; padding: 12px 16px; background: rgba(255,255,255,.96); border-top: 1px solid var(--line); }
+
+  .dash-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--navy); color: #fff; position: sticky; top: 0; z-index: 5; }
+  .dash-top .brand { color: #fff; font-size: 20px; }
+  .avatar { width: 34px; height: 34px; border-radius: 999px; background: var(--teal); display: grid; place-items: center; font-weight: 600; }
+  .dash { padding: 18px 16px 96px; }
+  .dash h1 { font-family: var(--display); font-weight: 700; font-size: 32px; margin: 0 0 2px; }
+  .dash .sub { color: var(--ink-3); margin: 0 0 18px; }
+  .dash h2 { font-size: 17px; font-weight: 600; margin: 22px 0 10px; display: flex; align-items: center; gap: 8px; }
+  .count { font-size: 13px; font-weight: 600; background: var(--navy); color: #fff; border-radius: 999px; padding: 2px 8px; }
+  .alerts { display: grid; gap: 10px; }
+  .alert { display: grid; grid-template-columns: 4px 1fr auto; gap: 12px; align-items: center; background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 12px 12px 12px 0; overflow: hidden; }
+  .alert .bar { align-self: stretch; border-radius: 0 4px 4px 0; }
+  .alert.high .bar { background: var(--red); }
+  .alert.medium .bar { background: #E0A100; }
+  .alert b { display: block; font-size: 16px; font-weight: 600; }
+  .alert span { display: block; color: var(--ink-3); font-size: 14px; line-height: 1.35; }
+  .alert a { font-size: 14px; font-weight: 600; color: var(--teal); text-decoration: none; }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .tile { background: var(--white); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: grid; }
+  .tile img { width: 100%; height: 64px; object-fit: cover; }
+  .tile div { padding: 10px 12px 12px; display: grid; gap: 5px; }
+  .tile b { font-size: 16px; font-weight: 600; }
+  .chip { justify-self: start; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 6px; }
+  .chip.occupied { background: #DCEBEE; color: var(--teal); }
+  .chip.vacant { background: var(--cream); color: #5B5A1E; }
+  .chip.repair { background: #E6EAF0; color: #44546A; }
+  .tile .who { font-size: 14px; color: var(--ink-2); }
+  .tile .rent { font-size: 13px; font-weight: 600; }
+  .rent.ok { color: var(--green); } .rent.late { color: var(--red); } .rent.soon { color: var(--amber); } .rent.none { color: var(--ink-3); font-weight: 500; }
+  .tabbar { position: absolute; bottom: 0; left: 0; right: 0; display: grid; grid-template-columns: repeat(5, 1fr); background: var(--white); border-top: 1px solid var(--line); padding: 8px 4px 14px; z-index: 6; }
+  .tab { display: grid; justify-items: center; gap: 3px; font-size: 12px; font-weight: 600; color: var(--ink-3); position: relative; }
+  .tab.on { color: var(--teal); }
+  .tab .badge2 { position: absolute; top: -4px; right: 18px; background: var(--red); color: #fff; font-size: 11px; border-radius: 999px; padding: 1px 6px; }
+
+  .plate { position: absolute; right: 12px; top: 12px; background: var(--navy); color: var(--cream); font: 700 18px/1 var(--display); padding: 7px 10px; border-radius: 6px; box-shadow: inset 0 0 0 2px var(--navy), inset 0 0 0 3.5px rgba(237,237,206,.8), 0 4px 10px -4px rgba(0,0,0,.5); }
+  .compound { padding: 28px 16px 8px; }
+  .map { position: relative; background: #E4E6D2; border: 2px solid var(--navy); border-radius: 14px; padding: 14px; display: grid; grid-template-columns: 1fr 34px 1fr; gap: 10px; }
+  .map .col { display: grid; gap: 10px; }
+  .walk { background: repeating-linear-gradient(180deg, #CFD2BA 0 10px, #D9DBC4 10px 20px); border-radius: 6px; display: grid; place-items: center; }
+  .walk span { writing-mode: vertical-rl; transform: rotate(180deg); font: 600 12px var(--body); color: var(--ink-3); letter-spacing: .04em; }
+  .lot { display: grid; gap: 2px; padding: 10px; border-radius: 8px; text-decoration: none; min-height: 74px; align-content: start; }
+  .lot b { font: 700 20px/1 var(--display); }
+  .lot span { font-size: 13px; font-weight: 600; }
+  .lot--available { background: var(--cream); color: var(--teal); border: 2px solid var(--teal); }
+  .lot--soon { background: #fff; color: var(--navy); border: 2px dashed var(--navy); }
+  .lot--occupied { background: var(--navy); color: #C9D6E2; border: 2px solid var(--navy); }
+  .lot--big { min-height: 100px; }
+  .gate { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 3px solid var(--navy); padding-top: 10px; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+  .gate i { font-style: normal; background: var(--navy); color: var(--cream); padding: 4px 10px; border-radius: 4px; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-top: 10px; }
+  .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .legend .l1::before { background: var(--cream); border: 2px solid var(--teal); } .legend .l2::before { background: #fff; border: 2px dashed var(--navy); } .legend .l3::before { background: var(--navy); }
+  .boards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .board { position: relative; background: #fff; color: var(--navy); border: 2px solid var(--navy); border-radius: 8px; padding: 14px 12px 10px; box-shadow: 0 3px 0 var(--cream); }
+  .board::before, .board::after { content: ""; position: absolute; top: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--sea); }
+  .board::before { left: 7px; } .board::after { right: 7px; }
+  .board b { display: block; font: 700 22px/1.05 var(--display); }
+  .board span { font-size: 13px; color: var(--ink-3); }
+  .board--home { grid-column: 1 / -1; background: var(--cream); }
+
+  :root { --sign: "Alfa Slab One", Georgia, serif; --brush: "Kaushan Script", cursive; }
+  .phone .screen { background: #F3F1E2; }
+  .section-title, .hero h1, .detail h1, .cta h3, .dash h1 { font-family: var(--sign); font-weight: 400; letter-spacing: .01em; }
+  .section-title { font-size: 28px; display: inline-block; background: linear-gradient(transparent 70%, rgba(98,159,173,.45) 70% 92%, transparent 92%); padding: 0 2px; }
+  .brush { font-family: var(--brush); color: var(--teal); font-size: 20px; display: block; margin: 0 0 2px; transform: rotate(-2deg); transform-origin: left; }
+  .forrent { position: relative; margin: -70px 16px 0; z-index: 2; background: var(--cream); border: 4px solid var(--navy); outline: 2px solid var(--cream); outline-offset: -10px; border-radius: 6px; padding: 18px 16px 16px; text-align: center; box-shadow: 0 10px 0 -2px var(--navy), 0 16px 30px -12px rgba(12,44,85,.6); transform: rotate(-1.2deg); }
+  .forrent::before, .forrent::after { content: ""; position: absolute; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: var(--sea); box-shadow: inset 0 0 0 2px var(--navy); }
+  .forrent::before { left: 10px; } .forrent::after { right: 10px; }
+  .forrent .big { display: block; font: 400 54px/0.95 var(--sign); color: var(--navy); text-shadow: 3px 3px 0 var(--sea); letter-spacing: .02em; }
+  .forrent .script { display: block; font: 400 26px/1.2 var(--brush); color: var(--teal); margin: 4px 0 8px; }
+  .forrent .tel { display: inline-block; font: 700 24px/1 var(--display); color: var(--cream); background: var(--navy); padding: 8px 14px; border-radius: 4px; }
+  .forrent small { display: block; margin-top: 8px; font-weight: 600; color: var(--ink-2); }
+  .hero { min-height: 430px; }
+  .hero h1 { font-size: 36px; text-shadow: 2px 2px 0 rgba(12,44,85,.9); }
+  .card { background: var(--cream); border: 3px solid var(--navy); border-radius: 6px; box-shadow: 0 6px 0 -1px var(--navy); position: relative; }
+  .card-photo { margin: 10px 10px 0; border: 2px solid var(--navy); border-radius: 3px; overflow: hidden; }
+  .card-body { position: relative; }
+  .card-body::before, .card-body::after { content: ""; position: absolute; bottom: 10px; width: 8px; height: 8px; border-radius: 50%; background: var(--sea); box-shadow: inset 0 0 0 2px var(--navy); }
+  .card-body::before { left: 8px; } .card-body::after { right: 8px; }
+  .card h3 { font: 400 24px/1.05 var(--sign); color: var(--navy); }
+  .card .loc { font-family: var(--brush); font-size: 18px; color: var(--teal); }
+  .card-foot { border-top: 2px dashed var(--navy); }
+  .badge { border: 2px solid var(--navy); border-radius: 4px; font-family: var(--display); font-size: 17px; letter-spacing: .02em; transform: rotate(-3deg); }
+  .badge::before { display: none; }
+  .badge--available { background: #FFE27A; color: var(--navy); }
+  .stats { background: var(--navy); }
+  .stats div { border-color: rgba(237,237,206,.2); }
+  .stats b { color: var(--cream); } .stats span { color: #C9D6E2; }
+  .steps li::before { background: var(--navy); color: var(--cream); border-radius: 4px; font-family: var(--sign); }
+  .cta { border: 3px solid var(--navy); box-shadow: 0 6px 0 -1px var(--navy); border-radius: 6px; }
+  .tile { border: 2px solid var(--navy); border-radius: 6px; background: var(--cream); }
+  .tile b { font-family: var(--sign); font-weight: 400; font-size: 17px; }
+</style>
+</head>
+<body>
+<main class="deck">
+  <header class="deck-head">
+    <div>
+      <h1>5A Rentals: website + owner dashboard, look and feel</h1>
+      <p>Mockup v12 (painted-sign look): compound map, house-number plaques, jeepney signboards; Acacia uses a plain one-floor photo; every house has a matching photo; all one-floor houses; car-free photos, motorcycle parking only; six separate houses in one compound (one bigger 2-bedroom house), small family rentals at ₱2,500–3,000, free-licensed photos of ordinary Filipino houses (placeholders until the real ones; credits in docs/design/photo-credits.md), utilities shown per house. Each phone screen scrolls.</p>
+    </div>
+    <div class="tokens">
+      <div class="swatch"><span style="background:#0C2C55"></span>Navy<br>#0C2C55</div>
+      <div class="swatch"><span style="background:#296374"></span>Teal<br>#296374</div>
+      <div class="swatch"><span style="background:#629FAD"></span>Sea<br>#629FAD</div>
+      <div class="swatch"><span style="background:#EDEDCE"></span>Cream<br>#EDEDCE</div>
+    </div>
+  </header>
+
+  <div class="frames">
+    <figure class="frame-wrap">
+      <div class="phone"><div class="screen">
+        <header class="site-header">
+          <a class="brand" href="#"><span class="plaque">5A</span>Rentals</a>
+          <button class="icon-btn" aria-label="Message us on Messenger"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.8 1.2 5.2 3.2 6.9V22l3-1.7c1.2.3 2.4.5 3.8.5 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.6-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.8-2.7-5.3 5.7z"/></svg></button>
+        </header>
+        <section class="hero">
+          <div class="hero-copy">
+            <span class="location-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Dasmariñas City, Cavite</span>
+            <h1>Affordable family houses for rent in Dasmariñas</h1>
+            <p>Six separate houses in one family-run compound, near Dasmariñas West National High School. One jeep ride to WalterMart, the bayan, EAC and the hospital.</p>
+            <div class="btn-row"><a class="btn btn-cream btn-block" href="#">See the houses</a><a class="btn btn-ghost" href="#">Message us</a></div>
+          </div>
+        </section>
+        <div class="forrent"><span class="big">FOR RENT</span><span class="script">Paupahan sa Dasmariñas</span><span class="tel">Call/Text 0900 000 0000</span><small>₱2,500–3,000 a month. Pwede na lumipat!</small></div>
+        <div class="stats" style="margin-top:18px"><div><b>₱2,500</b><span>rent starts at</span></div><div><b>1</b><span>available now</span></div><div><b>1</b><span>opening soon</span></div></div>
+        <section class="compound"><span class="brush">Isang compound, anim na bahay</span><h2 class="section-title">The compound</h2><p class="section-sub">Six separate one-floor houses around one walkway. Tap a house.</p>
+<div class="map"><div class="col"><a class="lot lot--occupied" href="#"><b>No. 1</b><span>Acacia</span></a><a class="lot lot--occupied" href="#"><b>No. 2</b><span>Narra</span></a><a class="lot lot--occupied" href="#"><b>No. 3</b><span>Molave</span></a></div>
+<div class="walk"><span>Walkway</span></div>
+<div class="col"><a class="lot lot--occupied" href="#"><b>No. 4</b><span>Banaba</span></a><a class="lot lot--available" href="#"><b>No. 5</b><span>Kamagong · Available</span></a><a class="lot lot--soon lot--big" href="#"><b>No. 6</b><span>Yakal · 2 bedrooms · Soon</span></a></div>
+<div class="gate"><span>Motorcycle parking</span><i>Gate</i><span>Street</span></div></div>
+<div class="legend"><span class="l1">Available</span><span class="l2">Opening soon</span><span class="l3">Occupied</span></div></section>
+        <div class="list">
+          <div><span class="brush">Tara, tingnan mo!</span><h2 class="section-title">Our houses</h2><p class="section-sub" style="margin:0">Six separate houses in one compound. Each has a living room, kitchen and bathroom; most have 1 bedroom, one bigger house has 2.</p></div>
+          <a class="card" href="#"><div class="card-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Small_House_in_the_Philippines_%2802-28-2021%29.jpg/960px-Small_House_in_the_Philippines_%2802-28-2021%29.jpg" alt=""><span class="badge badge--available">Available</span><span class="plate">No. 5</span></div>
+            <div class="card-body"><h3>Kamagong House</h3><p class="loc">Near Dasmariñas West NHS</p>
+              <div class="card-foot"><p class="price">₱3,000 <small>/ month</small></p><span class="util">Own meter</span></div></div></a>
+          <a class="card" href="#"><div class="card-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/A_house_under_a_mango_tree_in_Talisay_City_of_Cebu.jpg/960px-A_house_under_a_mango_tree_in_Talisay_City_of_Cebu.jpg" alt=""><span class="badge badge--soon">Available soon</span><span class="plate">No. 6</span></div>
+            <div class="card-body"><h3>Yakal House</h3><p class="loc">Bigger house with 2 bedrooms</p>
+              <div class="card-foot"><p class="price">₱2,800 <small>/ month</small></p><span class="util">Shared utilities</span></div></div></a>
+          <a class="card is-muted" href="#"><div class="card-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Houses_in_Mandaue_City_%2803-07-2021%29.jpg/960px-Houses_in_Mandaue_City_%2803-07-2021%29.jpg" alt=""><span class="badge badge--occupied">Occupied</span><span class="plate">No. 1</span></div>
+            <div class="card-body"><h3>Acacia House</h3><p class="loc">Near Dasmariñas West NHS</p>
+              <div class="card-foot"><p class="price">₱2,500 <small>/ month</small></p><span class="util">Own meter</span></div></div></a>
+        </div>
+        <section class="nearby">
+          <h2 class="section-title">One jeep ride from home</h2>
+          <p class="section-sub">All six houses are in one compound near Dasmariñas West National High School.</p>
+          <ul class="boards"><li class="board board--home"><b>Dasmariñas West NHS</b><span>Walking distance</span></li><li class="board"><b>WalterMart</b><span>1 jeep ride</span></li><li class="board"><b>Bayan</b><span>Town proper, market</span></li><li class="board"><b>EAC</b><span>Emilio Aguinaldo College</span></li><li class="board"><b>Hospital</b><span>1 jeep ride</span></li></ul>
+        </section>
+        <section class="section">
+          <h2 class="section-title">How renting with us works</h2>
+          <ol class="steps">
+            <li><div><strong>Message us or book a viewing</strong>Tell us which house and when you can visit.</div></li>
+            <li><div><strong>See the house in person</strong>One of us shows you around and answers your questions.</div></li>
+            <li><div><strong>Sign and move in</strong>Sign the lease, pay the advance and deposit, get your keys.</div></li>
+          </ol>
+        </section>
+        <div class="cta"><h3>Want to see a house this week?</h3><p>Send us a message and we'll set a viewing time.</p><a class="btn btn-cream" href="#">Book a viewing</a></div>
+        <footer class="footer"><span class="brand"><span class="plaque plaque--light">5A</span>Rentals</span>5A Rentals is run by our family of five.<br>Dasmariñas City, Cavite. Call or text 0900 000 0000.<br><a href="#">Owner login</a></footer>
+      </div></div>
+      <figcaption>Website: home</figcaption>
+    </figure>
+
+    <figure class="frame-wrap">
+      <div class="phone"><div class="screen">
+        <header class="site-header">
+          <a class="back" href="#"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>All houses</a>
+          <a class="brand" href="#" style="font-size:18px"><span class="plaque" style="height:26px;min-width:34px;font-size:17px">5A</span>Rentals</a>
+        </header>
+        <div class="gallery"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Small_House_in_the_Philippines_%2802-28-2021%29.jpg/960px-Small_House_in_the_Philippines_%2802-28-2021%29.jpg" alt=""><span class="counter">1 / 4</span><span class="badge badge--available">Available</span><span class="plate">No. 5</span></div>
+        <div class="thumbs"><img class="on" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Small_House_in_the_Philippines_%2802-28-2021%29.jpg/960px-Small_House_in_the_Philippines_%2802-28-2021%29.jpg" alt=""><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=200&q=60" alt=""><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=200&q=60" alt=""><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=200&q=60" alt=""></div>
+        <div class="detail">
+          <h1>Kamagong House</h1>
+          <p class="loc">Living room, 1 bedroom, kitchen and bathroom. Near Dasmariñas West National High School.</p>
+          <div class="price-big">₱3,000 <small style="font:500 17px var(--body);color:var(--ink-3)">a month</small></div>
+          <p class="terms">1 month advance + 1 month deposit.</p>
+          <div class="fact-grid"><div><b>1</b><span>bedroom</span></div><div><b>1</b><span>living room</span></div><div><b>1</b><span>kitchen</span></div><div><b>1</b><span>bathroom</span></div></div>
+          <h2 class="h2" style="margin-top:0">What you get</h2>
+          <ul class="checks">
+            <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#EDEDCE"/><path d="M6 10.5l2.6 2.6L14.2 7" fill="none" stroke="#296374" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pay only what you use</li>
+            <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#EDEDCE"/><path d="M6 10.5l2.6 2.6L14.2 7" fill="none" stroke="#296374" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Own water and electric meter</li>
+            <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#EDEDCE"/><path d="M6 10.5l2.6 2.6L14.2 7" fill="none" stroke="#296374" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Motorcycle parking only</li>
+            <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#EDEDCE"/><path d="M6 10.5l2.6 2.6L14.2 7" fill="none" stroke="#296374" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Small pets allowed</li>
+          </ul>
+          <h2 class="h2">Location</h2>
+          <p class="prose">Near Dasmariñas West National High School. One jeep ride to WalterMart, the bayan, Emilio Aguinaldo College and the hospital. Parking is for motorcycles only.</p>
+          <h2 class="h2">About the house</h2>
+          <p class="prose">A clean, simple house for a small family. Has its own water and electric meter, so you pay only what you use.</p>
+          <h2 id="book" class="h2" style="margin-top:26px">Book a viewing</h2>
+          <form class="form" onsubmit="return false">
+            <label class="field">Your name<input placeholder="Juan Dela Cruz"></label>
+            <label class="field">Mobile number<input inputmode="tel" placeholder="09XX XXX XXXX"></label>
+            <div class="row-2"><label class="field">Preferred date<input type="date"></label><label class="field">Time of day<select><option>Afternoon</option></select></label></div>
+            <label class="field">Message (optional)<textarea placeholder="Questions, number of people, move-in date…"></textarea></label>
+            <button class="btn btn-primary">Send viewing request</button>
+            <p class="hint">We usually reply within the day.</p>
+          </form>
+          <div style="height:20px"></div>
+        </div>
+        <div class="sticky-bar"><a class="btn btn-outline btn-block" href="#">Message</a><a class="btn btn-primary btn-block" href="#book">Book a viewing</a></div>
+      </div></div>
+      <figcaption>Website: house page</figcaption>
+    </figure>
+
+    <figure class="frame-wrap">
+      <div class="phone"><div class="screen">
+        <header class="dash-top">
+          <span class="brand"><span class="plaque plaque--light" style="height:28px;font-size:18px">5A</span>Owner dashboard</span>
+          <span class="avatar">A</span>
+        </header>
+        <div class="dash">
+          <h1>Friday, Nov 6</h1>
+          <p class="sub">4 of 6 houses occupied</p>
+          <h2>Needs attention <span class="count">3</span></h2>
+          <div class="alerts">
+            <div class="alert high"><span class="bar"></span><div><b>₱1,500 rent overdue</b><span>Narra House, Paolo Garcia</span><span>Due Oct 29, 8 days ago</span></div><a href="#">Record</a></div>
+            <div class="alert medium"><span class="bar"></span><div><b>₱2,500 rent due in 3 days</b><span>Banaba House, Ramon Dela Rosa</span><span>Due Mon, Nov 9</span></div><a href="#">Record</a></div>
+            <div class="alert medium"><span class="bar"></span><div><b>Lease ends in 45 days</b><span>Acacia House, Liza Mendoza</span><span>Ends Dec 21</span></div><a href="#">Open</a></div>
+          </div>
+          <h2>Houses</h2>
+          <div class="tiles">
+            <div class="tile"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Houses_in_Mandaue_City_%2803-07-2021%29.jpg/960px-Houses_in_Mandaue_City_%2803-07-2021%29.jpg" alt=""><div><b>Acacia House</b><span class="chip occupied">Occupied</span><span class="who">Liza Mendoza</span><span class="rent ok">November paid</span></div></div>
+            <div class="tile"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/1439Palumlum%2C_Alfonso%2C_Cavite_20.jpg/960px-1439Palumlum%2C_Alfonso%2C_Cavite_20.jpg" alt=""><div><b>Narra House</b><span class="chip occupied">Occupied</span><span class="who">Paolo Garcia</span><span class="rent late">₱1,500 overdue</span></div></div>
+            <div class="tile"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Houses_in_Casili_Hills_%2804-24-2021%29.jpg/960px-Houses_in_Casili_Hills_%2804-24-2021%29.jpg" alt=""><div><b>Molave House</b><span class="chip occupied">Occupied</span><span class="who">Grace Villanueva</span><span class="rent ok">November paid</span></div></div>
+            <div class="tile"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/My_Nice_house_for_the_weekend%2C_Dive_Solana%2C_Mabini_Batangas_-_panoramio.jpg/960px-My_Nice_house_for_the_weekend%2C_Dive_Solana%2C_Mabini_Batangas_-_panoramio.jpg" alt=""><div><b>Banaba House</b><span class="chip occupied">Occupied</span><span class="who">Ramon Dela Rosa</span><span class="rent soon">Due Nov 9</span></div></div>
+            <div class="tile"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Small_House_in_the_Philippines_%2802-28-2021%29.jpg/960px-Small_House_in_the_Philippines_%2802-28-2021%29.jpg" alt=""><div><b>Kamagong House</b><span class="chip vacant">Vacant</span><span class="who">No tenant</span><span class="rent none">1 viewing request</span></div></div>
+            <div class="tile"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/A_house_under_a_mango_tree_in_Talisay_City_of_Cebu.jpg/960px-A_house_under_a_mango_tree_in_Talisay_City_of_Cebu.jpg" alt=""><div><b>Yakal House</b><span class="chip repair">Under repair</span><span class="who">No tenant</span><span class="rent none">Ceiling repair</span></div></div>
+          </div>
+        </div>
+        <nav class="tabbar">
+          <span class="tab on"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11 12 4l9 7v9H3z"/></svg>Overview</span>
+          <span class="tab"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Houses</span>
+          <span class="tab"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>Rent</span>
+          <span class="tab"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 7l3-3 3 3-3 3M17 4 9 12M4 20l5-5"/></svg>Repairs</span>
+          <span class="tab"><span class="badge2">2</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H8l-4 4z"/></svg>Inbox</span>
+        </nav>
+      </div></div>
+      <figcaption>Owner dashboard: overview</figcaption>
+    </figure>
+  </div>
+</main>
+</body>
+</html>
